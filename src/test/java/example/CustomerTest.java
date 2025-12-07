@@ -22,13 +22,13 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerName() {
+    public void whenCustomerCreatedThenNameIsReturned() {
         Customer customer = new Customer("John Doe", List.of());
         assertEquals("John Doe", customer.getName());
     }
 
     @Test
-    public void testEmptyRentals() {
+    public void whenNoRentalsThenStatementShowsZeroAmountAndPoints() {
         Customer customer = new Customer("John Doe", List.of());
         String statement = customer.statement();
 
@@ -38,7 +38,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleRegularRental_OneDayOnly() {
+    public void whenRegularMovieRentedForOneDayThenCharges2Dollars() {
         Rental rental = new Rental(regularMovie, 1);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -49,7 +49,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleRegularRental_TwoDays() {
+    public void whenRegularMovieRentedForTwoDaysThenCharges2Dollars() {
         Rental rental = new Rental(regularMovie, 2);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -59,7 +59,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleRegularRental_ThreeDays() {
+    public void whenRegularMovieRentedForThreeDaysThenCharges3Point5Dollars() {
         Rental rental = new Rental(regularMovie, 3);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -69,7 +69,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleRegularRental_FiveDays() {
+    public void whenRegularMovieRentedForFiveDaysThenCharges6Point5Dollars() {
         Rental rental = new Rental(regularMovie, 5);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -79,7 +79,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleNewReleaseRental_OneDay() {
+    public void whenNewReleaseRentedForOneDayThenCharges3DollarsAndOnePoint() {
         Rental rental = new Rental(newReleaseMovie, 1);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -90,7 +90,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleNewReleaseRental_TwoDays() {
+    public void whenNewReleaseRentedForTwoDaysThenCharges6DollarsAndTwoPoints() {
         Rental rental = new Rental(newReleaseMovie, 2);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -101,7 +101,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleNewReleaseRental_FourDays() {
+    public void whenNewReleaseRentedForFourDaysThenCharges12DollarsAndTwoPoints() {
         Rental rental = new Rental(newReleaseMovie, 4);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -112,7 +112,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleChildrensRental_OneDay() {
+    public void whenChildrensMovieRentedForOneDayThenCharges1Point5Dollars() {
         Rental rental = new Rental(childrensMovie, 1);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -122,7 +122,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleChildrensRental_ThreeDays() {
+    public void whenChildrensMovieRentedForThreeDaysThenCharges1Point5Dollars() {
         Rental rental = new Rental(childrensMovie, 3);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -132,7 +132,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleChildrensRental_FourDays() {
+    public void whenChildrensMovieRentedForFourDaysThenCharges3Dollars() {
         Rental rental = new Rental(childrensMovie, 4);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -142,7 +142,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testSingleChildrensRental_FiveDays() {
+    public void whenChildrensMovieRentedForFiveDaysThenCharges4Point5Dollars() {
         Rental rental = new Rental(childrensMovie, 5);
         Customer customer = new Customer("John Doe", List.of(rental));
         String statement = customer.statement();
@@ -152,7 +152,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testMultipleRentals() {
+    public void whenMultipleMoviesRentedThenCalculatesTotalAmountAndPoints() {
         List<Rental> rentals = List.of(
                 new Rental(regularMovie, 1),
                 new Rental(newReleaseMovie, 4),
@@ -161,7 +161,6 @@ public class CustomerTest {
 
         Customer customer = new Customer("John Doe", rentals);
         String statement = customer.statement();
-
         assertTrue(statement.contains("Regular Movie\t2.0"));
         assertTrue(statement.contains("New Release\t12.0"));
         assertTrue(statement.contains("Kids Movie\t4.5"));
@@ -171,7 +170,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testMultipleNewReleaseRentals() {
+    public void whenMultipleNewReleasesRentedThenBonusPointsAppliedCorrectly() {
         Movie movie1 = new Movie("New 1", NEW_RELEASE);
         Movie movie2 = new Movie("New 2", NEW_RELEASE);
 
@@ -187,7 +186,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testStatementFormat() {
+    public void whenStatementGeneratedThenFormattedCorrectly() {
         Rental rental = new Rental(regularMovie, 1);
         Customer customer = new Customer("Jane Smith", List.of(rental));
         String statement = customer.statement();
@@ -198,7 +197,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testComplexScenario() {
+    public void whenComplexRentalScenarioThenCalculatesCorrectTotalAndPoints() {
         Movie reg1 = new Movie("Action Movie", REGULAR);
         Movie reg2 = new Movie("Drama", REGULAR);
         Movie newRel1 = new Movie("Blockbuster 1", NEW_RELEASE);
@@ -217,7 +216,6 @@ public class CustomerTest {
         String statement = customer.statement();
 
         assertTrue(statement.contains("Amount owed is 23.5"));
-
         assertTrue(statement.contains("You earned 6 frequent renter points"));
     }
 }
