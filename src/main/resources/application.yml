@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: movie-rental-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rental_db
+    username: postgres
+    password: 12345678
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
